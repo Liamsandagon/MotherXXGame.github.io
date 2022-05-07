@@ -1,0 +1,99 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #1E202D;
+}
+
+section{
+    display: flex;
+    flex-direction: column; 
+}
+
+h1{
+    color: aliceblue;
+}
+*{
+    box-sizing: border-box;
+}
+ul{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+nav{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    background-color: #373b57;
+}
+ul a{
+    color: aliceblue;
+}
+.Logo{
+    height: 20pc;
+    display: block;
+    margin: 0 auto;
+}
+nav .menu{
+    display: flex;
+}
+nav .menu li a{
+    height: 40px;
+    line-height: 43px;
+    margin: 0px;
+    padding: 0px 100px;
+    display: flex;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    color:aliceblue;
+}
+.Video{
+    float: left;
+    margin: 10px;
+}
+.Video p{
+    font-size: 1.06em; user-select: auto;
+}
+.Video img{
+    display: block;
+    margin: 0 auto;
+    float: left;
+    margin: 10px;
+}
+p{
+    color: aliceblue;
+}
+#main{
+    padding-top: 80px;
+    background-color: aliceblue;
+
+}
+.showcase-box{
+    width: 430px;
+    height: 250px;
+    box-shadow: 5px 15px 30px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    margin: 0px 20px 10px 20px;
+    overflow: hidden;
+}
+.showcase-box img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+nav .menu li a:hover{
+    color: #FF0000;
+}
+.Back{
+    display: block;
+    margin: 0 auto;
+}
+.Back img{
+    height: 10pc;
+    margin: 10px;
+}

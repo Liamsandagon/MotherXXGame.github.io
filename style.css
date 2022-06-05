@@ -51,6 +51,12 @@ nav .menu li a{
     font-weight: 900;
     color:aliceblue;
 }
+
+.video-content{
+    display: flex;
+    flex-direction: column;
+}
+
 .Video{
     float: left;
     margin: 10px;
@@ -96,4 +102,69 @@ nav .menu li a:hover{
 .Back img{
     height: 10pc;
     margin: 10px;
+}
+.content{
+    height: 100vh;
+    width: 100%;
+    background-image: url(Images/Screenshots/1.png);
+    background-size: cover;
+    background-position: center;
+}
+.container{
+    /* width: 85vmin;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%); */
+    width: 85vmin;
+    align-self:center;
+    border: 10px solid #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.image-container{
+    width: 100%;
+    display: flex;
+    animation: slide 16s infinite;
+}
+.container img{
+    width: 100%;
+}
+
+@keyframes slide{
+    0%{
+        transform: translateX(0);
+    }
+    10%{
+        transform: translateX(0);
+    }
+    15%{
+        transform: translateX(-100%);
+    }
+    25%{
+        transform: translateX(-100%);
+    }
+    30%{
+        transform: translateX(-200%);
+    }
+    45%{
+        transform: translateX(-200%);
+    }
+    50%{
+        transform: translateX(-300%);
+    }
+    60%{
+        transform: translateX(-300%);
+    }
+    75%{
+        transform: translateX(-400%);
+    }
+    80%{
+        transform: translateX(-400%);
+    }
+    90%{
+        transform: translateX(-500%);
+    }
+    100%{
+        transform: translateX(-500%);
+    }
 }

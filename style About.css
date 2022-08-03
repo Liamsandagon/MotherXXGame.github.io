@@ -1,3 +1,18 @@
+:root{
+    --gradient: linear-gradient(
+      90deg,
+      #A17FFF,
+      #FFC45E,
+      #A17FFF,
+      #ff5e5e,
+      #b2ff7f,
+      #ff5e5e,
+      #d14a4a,
+      #ff5e5e,
+      #A17FFF
+
+    );
+}
 body{
     margin: 0px;
     padding: 0px;
@@ -222,4 +237,18 @@ nav .menu li a:hover{
         box-shadow: grey 0px 0px 10px;
         border-radius: 50%;
         width: 200px;
-    }   
+    }  
+    h2{
+        font-weight: 800;
+        background: var(--gradient);
+        background-size: 400%;
+        -webkit-background-clip: text;
+        color: transparent;
+        animation: animate 10s linear infinite;
+
+    } 
+    @keyframes animate {
+        100%{
+            background-position: 400%;
+        }
+    }

@@ -222,4 +222,8 @@ nav .menu li a:hover{
         box-shadow: grey 0px 0px 10px;
         border-radius: 50%;
         width: 200px;
-    }   
+    } 
+    .audio{
+        left: -9999px;
+        top: -9999px;
+    }  

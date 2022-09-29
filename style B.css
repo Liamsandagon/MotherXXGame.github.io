@@ -1,0 +1,85 @@
+:root{
+    --gradient: linear-gradient(
+      90deg,
+      #A17FFF,
+      #FFC45E,
+      #A17FFF,
+      #ff5e5e,
+      #b2ff7f,
+      #ff5e5e,
+      #d14a4a,
+      #ff5e5e,
+      #A17FFF
+
+    );
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url(ag.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;  
+    background-size: cover;
+}
+
+marquee{
+    font-family: 'Common Pixel', sans-serif;
+}
+
+nav{
+    background-image: url(h.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed 100%;  
+    background-size: 100% 100%;
+}
+.Logo{
+    padding: 0;
+    margin: 0 0 0 150px;
+    list-style:none;
+}
+
+li{
+    padding: 0;
+    float: right; 
+    align-content: flex-start;
+    margin: -5pc 0px 10px 10px;
+    list-style:none;
+    
+}
+
+.title {
+    text-align: center;
+    font-family: 'Common Pixel', sans-serif;
+    color: #A17FFF;
+}
+.container{
+    width: 90%;
+    padding: 10px;
+    margin: 100px auto;
+    background-color: #303030;
+    display: flex;
+    justify-content: center;
+    transition: 1s;
+
+}
+
+.box{
+    width: 200px;
+    height: 200px;
+    background: #FFC45E;
+    margin: 0px 10px;
+    transition: 1s;
+}
+
+.box img{
+    width: 200px;
+    height: 200px;
+}
+
+.box:hover{
+    transform: scale(1.3);
+}

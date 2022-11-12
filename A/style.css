@@ -1,0 +1,93 @@
+@font-face{
+    src: url(Fonts/wisdom.ttf);
+    font-family: Goblin;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Goblin;
+}
+
+body{    
+    background-color: aliceblue;
+}
+
+.Logos{
+    background: linear-gradient(to bottom, #346199,#3f2d8f);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Logod{
+    background: white;
+    overflow: hidden;
+}
+
+.main-nav{
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-nav{
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: #4f3499;
+    padding: 16px 32px;
+    border-bottom: 3px solid var(--primary);
+}
+
+a{
+    size: 10pc;
+    color: rgb(255, 255, 255);
+    margin: 0 16px;
+    text-decoration: none;
+}
+
+.Pic{
+    display: block;
+    margin: 0px auto;
+}
+
+.main{
+    background-color: aliceblue;
+}
+
+.tc-container{
+    
+    background-color: #3f2d8f;
+    width: 400px;
+    height: 400px;
+    position: relative;
+    margin: 40px;
+}
+
+.tc-container img{
+    width: 100%;
+    height: 100%;
+}
+
+.top-img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transition: all 1s ease;
+}
+
+.top-img:hover{
+    opacity: 1;
+}
+
+.tc-container h1{
+    text-align: center;
+}

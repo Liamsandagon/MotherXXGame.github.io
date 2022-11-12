@@ -157,3 +157,8 @@ li{
     position: fixed;
     z-index: 99999;
 }
+
+.Logo{
+    position: sticky;
+    top: 0;
+}

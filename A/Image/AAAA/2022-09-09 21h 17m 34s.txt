@@ -1,0 +1,234 @@
+class Scene_Menu < Scene_MenuBase
+  def start
+    super
+    create_menu_background
+    create_command_window
+    create_gold_window
+    create_status_window
+  end
+  def create_menu_background
+    @menu_background = Sprite.new
+    @menu_background.bitmap = Cache.system('menu_bg')
+  end
+  def dispose_menu_background
+    @menu_background.bitmap.dispose
+    @menu_background.dispose
+  end
+  def terminate
+    super
+    dispose_background
+    dispose_menu_background
+  end
+  def create_gold_window
+    @gold_window = Window_Gold.new
+  end
+  def create_command_window
+    @command_window = Window_MenuCommand.new
+    @command_window.set_handler(:item,    method(:command_item))
+    @command_window.set_handler(:skill,    method(:command_personal))
+    @command_window.set_handler(:equip,    method(:command_personal))
+    @command_window.set_handler(:status,    method(:command_personal))
+    @command_window.set_handler(:game_end,    method(:command_game_end))
+
+    @command_window.set_handler(:cancel,    method(:return_scene))
+  end
+  def create_status_window
+    @status_window = Window_MenuStatus.new(0, 37)
+  end
+end
+class Window_MenuCommand < Window_Command
+  def initialize
+    super(0, 0)
+    self.opacity = 0
+    select_last
+  end
+  def window_width
+    return 284
+  end
+  def window_height
+    return 61
+  end
+  def make_command_list
+    add_command(Vocab::item,   :item,   main_commands_enabled)
+    add_command(Vocab::skill,   :skill,   main_commands_enabled)
+    add_command(Vocab::equip,   :equip,   main_commands_enabled)
+    add_command(Vocab::status,   :status,   main_commands_enabled)
+    add_command(Vocab::game_end,   :game_end)
+
+  end
+  def alignment
+    return 0
+  end
+  def visible_line_number
+    return 1
+  end
+  def col_max
+    return item_max
+  end
+  def spacing
+    return 8
+  end
+  def contents_width
+    return (item_width + spacing) * item_max - spacing
+  end
+  def contents_height
+    return item_height
+  end
+  def top_col
+    return ox / (item_width + spacing)
+  end
+  def top_col=(col)
+    col = 0 if col < 0
+    col = col_max - 1 if col > col_max - 1
+    self.ox = col * (item_width + spacing)
+  end
+  def bottom_col
+    top_col + col_max - 1
+  end
+  def bottom_col=(col)
+    self.top_col = col - (col_max - 1)
+  end
+  def ensure_cursor_visible
+    self.top_col = index if index < top_col
+    self.bottom_col = index if index > bottom_col
+  end
+  def item_rect(index)
+    rect = super
+    rect.x = index * (item_width + spacing)
+    rect.y = 0
+    rect
+  end
+  def cursor_down(wrap = false)
+  end
+  def cursor_up(wrap = false)
+  end
+  def cursor_pagedown
+  end
+  def cursor_pageup
+  end
+end
+class Window_MenuStatus < Window_Selectable
+  def initialize(x, y)
+    super(x, y, window_width, window_height)
+    @pending_index = -1
+    self.opacity = 0
+    refresh
+  end
+  def window_width
+    return 544
+  end
+  def window_height
+    return 138
+  end
+  def item_width
+    return (width - standard_padding * 2) / 4
+  end
+  def item_height
+    return (height - standard_padding * 2 + spacing) - spacing
+  end
+  def col_max
+    item_max
+  end
+  def spacing
+    return 8
+  end
+  def item_rect(index)
+    rect = Rect.new
+    rect.width = item_width
+    rect.height = item_height
+    rect.x = index * item_width
+    rect.y = 0
+    rect
+  end
+  def contents_width
+    return [super - super % item_width, col_max * item_width].max
+  end
+  def contents_height
+    return height - standard_padding * 2
+  end
+  def col
+    index / col_max
+  end
+  def top_col
+    ox / item_width
+  end
+  def top_col=(col)
+    col = 0 if col < 0
+    col = col_max - 1 if col > col_max - 1
+    self.ox = col * item_width
+  end
+  def page_col_max
+    (width - padding - padding_bottom) / item_width
+  end
+  def page_item_max
+    page_col_max * col_max
+  end
+  def bottom_col
+    top_col + page_col_max - 1
+  end
+  def bottom_col=(col)
+    self.top_col = col - (page_col_max - 1)
+  end
+  def ensure_cursor_visible
+    self.top_col = index if index < top_col
+    self.bottom_col = index if index > bottom_col
+  end
+  def cursor_down(wrap = false)
+  end
+  def cursor_up(wrap = false)
+  end
+  def cursor_pagedown
+  end
+  def cursor_pageup
+  end
+  def draw_item(index)
+    actor = $game_party.members[index]
+    enabled = $game_party.battle_members.include?(actor)
+    rect = item_rect(index)
+    draw_item_background(index)
+    draw_actor_simple_status(actor, rect.x, rect.y)
+  end
+  def draw_actor_simple_status(actor, x, y)
+    draw_actor_name(actor, x + 0, y + 0)
+    draw_actor_hp(actor, x + 0, y + 32)
+    draw_actor_mp(actor, x + 0, y + 67)
+  end
+  def draw_actor_name(actor, x, y, width = 112)
+    change_color(hp_color(actor))
+    draw_text(x, y, width, 24, actor.name)
+  end
+  def draw_actor_hp(actor, x, y, width = 124)
+    draw_gauge(x, y, width, actor.hp_rate, hp_gauge_color1, hp_gauge_color2)
+    change_color(system_color)
+    draw_text(x, y, 30, line_height, Vocab::hp_a)
+    draw_current_and_max_values(x, y, width, actor.hp, actor.mhp,
+    hp_color(actor), normal_color)
+    end
+  def draw_actor_mp(actor, x, y, width = 124)
+    draw_gauge(x, y, width, actor.mp_rate, mp_gauge_color1, mp_gauge_color2)
+    change_color(system_color)
+    draw_text(x, y, 30, line_height, Vocab::mp_a)
+    draw_current_and_max_values(x, y, width, actor.mp, actor.mmp,
+    mp_color(actor), normal_color)
+  end
+end
+class Window_Gold < Window_Base
+  def initialize
+    super(384, 0, window_width, 48)
+    self.opacity = 0
+    refresh
+  end
+  def window_width
+    return 160
+  end
+  def refresh
+    contents.clear
+    change_color(system_color)
+    draw_text(4, 0, contents_width - 8, line_height, 'Gold')
+    cx = text_size(currency_unit).width
+    change_color(normal_color)
+    draw_text(4, contents_height - line_height, contents.width - 8 - cx - 2, line_height, value, 2)
+    change_color(system_color)
+    draw_text(4, contents_height - line_height, contents.width - 8, line_height, currency_unit, 2)
+  end
+end
